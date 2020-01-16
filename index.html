@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="app1" >
+<title>Airport</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<style>
+
+</style>
+<body>
+<div class="bg-light container" ng-controller="ctrl1">
+
+
+<header class="w3-panel w3-center w3-opacity" style="padding:3px">
+  <h1>Airport Finder</h1>
+</header>
+<div>
+    <h2 class="w3-center">Distance: <span id="demo"></span>{{radius}} Miles</h2>
+
+    <div class="slidecontainer">
+      <input type="range" ng-click="getValue('new')"" ng-model="radius" min="1" max="1000" ng-value='500' class="slider" id="myRange">
+    </div><br><br>
+  <center>
+  <button class="button button4 bg-danger" ng-click="subRadius(radius,'radius');getValue('new');"> - </button>
+  <div class="button1 button4 bg-secondary">{{radius}}</div>
+  <button class="button button4" ng-click="addRadius(radius,'radius');getValue('new');">+</button><br><br>
+  <button class="button button4 bg-primary" ng-click="getValue('new')">Search</button>
+  </center>
+</div>
+<br><br>
+<div id="listing" style="display: none">
+  <center>
+  <h3 class="w3-panel w3-center w3-opacity" ng-if="!total_rows">Searching <img src="searching.gif" style="height:50px;border-radius: 2.5em"></h3>
+  <h3 ng-if="total_rows">Airports in your search range</h3>
+  <br>
+  <div ng-repeat="airport in data_all track by $index">
+    <div ng-if="airport.fields.miles <= radius" class='lists'">
+      <table width="100%">
+        <tr>
+          <td class="float-left">
+            <h4>{{$index + 1}}.</h4> 
+          </td>
+          <td>
+            <h4>{{airport.fields.name}}</h4> 
+          </td>
+          <td class="float-right"> 
+            <h4>{{airport.fields.miles|number:1}} Miles</h4> 
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </center>
+  <br><br>
+</div>
+<!-- End Page Content -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!-- Load the JS Module -->
+<script src="my_script.js"></script>
+</body>
+</html>
